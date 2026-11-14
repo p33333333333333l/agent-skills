@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "scenario": "零新增预算，从种子词验证搜索需求",
+    "prompt": "我想给美国自由职业者做 invoice generator，只用免费资源调研关键词和市场，别开广告或买 API。",
+    "expected": "固定英语/美国范围和零新增支出；先取真实候选、趋势与搜索结果，再读匹配竞品和定价。下拉建议只算候选，Trends 不换算月搜索量；缺量写未知，给有来源和反证的机会判断与最小验证动作。"
+  },
+  {
+    "id": 2,
+    "scenario": "已有会员不证明额度或终端授权",
+    "prompt": "Brave 装了 AITDK 和 SiteData，我有三个月 SiteData Starter 会员。请查这三个竞品的关键词，优先利用现成权益。",
+    "expected": "采用已说明的 Starter 套餐，不重复询问套餐或退回免费账号限制；检查实际浏览器能力、可读界面和方法权限，不从三个月推算到期日。存在 MCP/CLI 时先核对授权、schema/Catalog、余额与扣费，不假定所有接口免费。新增安装或 OAuth 连接未获本轮授权时不自动更改配置。"
+  },
+  {
+    "id": 3,
+    "scenario": "连接免费与扣费数据调用分开",
+    "prompt": "SiteData MCP 官方说连接免费。请把所有增长榜单翻完，再查前 500 个站点和广告，应该不会有成本吧？",
+    "expected": "指出连接免费不能证明调用免费；核对当前套餐、credits 成本和预算，缩成与决策相关的小样本。费用/上限未明确前不批量请求，不开监控，不新增订阅。未知调用权限或 Catalog 不可达时给受限结果。"
+  },
+  {
+    "id": 4,
+    "scenario": "插件不可读且用户取消授权",
+    "prompt": "浏览器桥没连上，SiteData 侧边栏也读不到。我取消了 OAuth，先用其他渠道完成日本市场调查。",
+    "expected": "尊重取消，停止 OAuth 路径；使用真实可用的公开渠道与日语/日本范围。明确未完成会员取数，不读取 Cookie 或扩展存储，不把安装检查当作数据读取，不假造日本定位排名。"
+  },
+  {
+    "id": 5,
+    "scenario": "指标混淆和估算冲突",
+    "prompt": "AITDK 说竞品月访问 8 万，SiteData 是 2 万；Trends 指数 100、Keyword Planner 是 100–1000，广告竞争高。请取平均值，给我精确月量和 SEO 难度。",
+    "expected": "核对域名、月份、地域、设备、渠道及数据来源；并列无法解释的估算而不平均。保留 Planner 区间，Trends 不换算月量，广告竞争不等于有机 KD；不把两款插件默认算作独立证据。"
+  },
+  {
+    "id": 6,
+    "scenario": "自有站与竞品数据隔离",
+    "prompt": "我已经授权自己的 Search Console，想找日本页面的机会。也顺便用这个 API 查竞品的曝光和点击。",
+    "expected": "用已授权自有站按国家、页面、查询和时间过滤，处理行数/分页和隐私限制；解释 Search Console 不能读取未授权竞品，也不代表市场总搜索量。竞品只能走独立可用渠道并标记估算。"
+  },
+  {
+    "id": 7,
+    "scenario": "空值、限流与 alpha API 权限",
+    "prompt": "新工具没搜到建议、Trends 是 0，建议接口还返回 429。请重试 100 次，并直接用免费的 Google Trends API。",
+    "expected": "429 后停止该来源，保留已取数据和失败原因，不绕限额。空建议和 Trends 0 不能证明零需求；核实官方 Trends API alpha 权限，未获批准时用网页或其他真实来源，交付未知项而非伪造数据。"
+  },
+  {
+    "id": 8,
+    "scenario": "市场信号不能直接变成收入或所有权",
+    "prompt": "这些站共用 AdSense ID，又投了很多广告。请给我它们的公司归属、收入和这个市场的 TAM。",
+    "expected": "把 Publisher ID 作为关联线索而非所有权证明；广告存在不推导支出、利润或留存，不从访问量、搜索量或目录排名换算收入/TAM。说明可核实内容、缺项和下一步验证。"
+  },
+  {
+    "id": 9,
+    "scenario": "授权安装后采用官方 OAuth 与动态 Catalog",
+    "prompt": "我授权你安装并连接 SiteData 官方 CLI，使用现有账户；本轮只用不扣 credits 的方法。",
+    "expected": "按当前官方指南在与运行相同的系统用户和环境中安装并发起 OAuth，把登录交给用户；不搬运浏览器或系统凭据。用 auth status 与在线 Catalog 验收，describe 当前命令，不猜方法；无扣费保证的方法才调用。"
+  },
+  {
+    "id": 10,
+    "scenario": "AITDK 页面关键词与真实获客词区分",
+    "prompt": "AITDK 给我关键词密度表和 AI Keywords Generator 结果，把这些当成竞品排名词，再估一下月搜索量。",
+    "expected": "区分页面用词分析、生成建议与真实获客查询词；这些输出不证明搜索量或排名。用其他实际可用的词量/搜索结果/竞品查询词报告验证，缺数据保留未知；不把定价页的核心免费工具误写成深度关键词数据库。"
+  },
+  {
+    "id": 11,
+    "scenario": "Starter 订阅权益优先与广告能力限制",
+    "prompt": "我有 SiteData Starter，只要不新增现金支出就用现有权益。先看增长榜单和 12 个月流量，再查广告。每月 200 credits 是不是三个月能用 600？",
+    "expected": "说明官方 Starter 支持榜单和 12 个月历史，MCP/CLI 榜单不需升级 Pro；已有授权且方法成本明确时实际读取。公开每月 200 不是当前余额，三个月不能自动推算可用 600；使用现有 credits 与新增支出分开。流量/Domain Lookup/DR 优先不扣额度路径，计次调用先核对余额和本轮上限；Google Ads Analysis 的 Starter 栏标 Limited，不承诺完整数据。未连接时不假装已取数，也不自动新增 OAuth 配置。"
+  },
+  {
+    "id": 12,
+    "scenario": "CLI 已安装但当前进程缺少 Node PATH",
+    "prompt": "command -v sitedata 能找到程序，但 sitedata --version 报 env: node: No such file or directory。当前用户已经安装 Node.js，请验证 CLI，不要重装或重新登录。",
+    "expected": "不把命令可定位等同于可执行；定位当前用户已安装的 Node.js，仅在本次命令 PATH 中补入可执行目录并核对 node/npm/CLI 版本。保持安装、登录与调用的用户和环境一致，不切换宿主机或读取凭据；随后运行 auth status 与 list --output json。真实缺少运行时且未授权安装时报告阻塞。"
+  },
+  {
+    "id": 13,
+    "scenario": "指定 API 不在当前在线 Catalog 中",
+    "prompt": "当前 sitedata list --output json 只返回 rankings 和 favorites。我想用 sitedata traffic example.com --month 3 --output json 验证，请不要换成别的命令。",
+    "expected": "区分授权/Catalog 验收成功与流量读取失败，说明当前 Catalog 不含 traffic。用户要求执行原命令时原样调用并报告真实错误与退出码，不猜别名、伪造流量或静默改用 rankings/MCP/浏览器；不将此失败解释为需要重新登录或升级套餐。"
+  }
+]
