@@ -5,7 +5,7 @@ description: "给 p3l.me 添加公开目录条目，补写已点名但未收录�
 
 # 给 p3l.me 添加条目
 
-交付是一条 `src/content/sites.json` 对象、对应本地素材和持久证据，生成 `/sites/{slug}/` 与 `/zh-cn/sites/{slug}/`。所有路径相对 p3l.me 仓库根目录；先定位该仓库检出位置再动手。
+交付是一条 `src/content/sites.json` 对象、对应本地素材和持久证据，生成 `/sites/{slug}/` 与 `/zh-cn/sites/{slug}/`。所有路径相对 p3l.me 仓库根目录；按适用的 `AGENTS.md` 和实际检出位置定位仓库（Debian 服务器为 `/srv/workspaces/p3l.me`，Fedora 为 `~/workspaces/p3l.me`）。
 
 ## 1. 锁定范围
 
@@ -96,7 +96,7 @@ https://api.ahrefs.com/v3/public/domain-rating-free?target={域名}&output=json
 
 用户要看页面时，用已构建的预览确认本机地址返回 200，再打开中英文首页和详情页。验收指定分类、双语文字、图标、截图、DR；请用户用真实移动端 390px 视口检查无横向滚动、文字可读、触控目标和筛选交互，同时检查受影响的桌面视图。
 
-用户要求提交时，先展示双语 Conventional Commits 信息和本次文件清单，等用户确认措辞后只提交本次改动；只有明确要求推送才推送。Git 操作仅限项目仓库，不自动建分支、提交其他工作区改动或做会丢弃用户改动的整文件还原。
+分支、rebase、提交与推送流程遵循适用的全局及项目 `AGENTS.md`，本技能不提供豁免。用户要求提交时，先展示双语 Conventional Commits 信息和本次文件清单，等用户确认措辞后只提交本次改动；未要求提交或推送时不自行执行。Git 操作仅限项目仓库，不提交其他工作区改动，不做会丢弃用户改动的整文件还原。
 
 ## 维护测试
 
