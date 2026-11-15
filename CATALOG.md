@@ -3,8 +3,10 @@
 本机在用技能的全量清单。**只有「自建」技能的正文收录在本仓库**；导入技能仅登记来源与许可证，正文不入库，避免转载版权内容。
 
 - 自建：7 个，正文在 `skills/`
-- 导入：20 个，正文在 `~/.cc-switch/skills/`（本机），来源见下表
-- 合计：27 个
+- 导入：23 个，正文在 `~/.cc-switch/skills/`（本机），来源见下表
+- 合计：30 个
+
+数字口径：`skills/` 下 7 个真实目录，`~/.cc-switch/skills/` 下 23 个真实目录（其余条目是指回本仓库的软链接），`~/.dsh/skills/` 共 30 个入口（7 个指向本仓库 + 23 个指向 `~/.cc-switch/skills/`）。新增或删除技能时，三处一起改。
 
 ## 自建技能（正文已收录）
 
@@ -39,6 +41,8 @@
 | `humanizer` | Siqi Chen，v4.0.0 | MIT | 英文去 AI 味改写 |
 | `humanizer-zh` | 基于 blader/humanizer v3.0.0 与 Humanizer-zh PR 39 | MIT | 中文去 AI 味改写 |
 | `ponytail` | 未查明 | MIT | 最小改动的懒资深开发模式 |
+| `ponytail-audit` | 未查明 | 未声明 | 全仓质量审计，一次性出报告，不改代码 |
+| `ponytail-review` | 未查明 | 未声明 | 审查一次改动：逻辑、安全、负载、测试、性能、冗余 |
 | `design-taste-frontend` | tasteskill 2.5.1 | 未声明 | 前端设计与反模板化检查 |
 | `high-end-visual-design` | Classic style skill 包 | 未声明 | 高端视觉风格（按名调用） |
 | `minimalist-ui` | Classic style skill 包 | 未声明 | 极简编辑风 UI（按名调用） |
@@ -46,7 +50,7 @@
 | `obsidian-markdown` | 未查明 | 未声明 | Obsidian 风格 Markdown |
 | `writing-for-agents` | 未查明 | 未声明 | 写给 agent 读的文档 |
 
-> 标注「未查明」的 5 项：本机无来源记录，且当前网络检索不可用，未做核实。请勿据此判断归属。
+> 标注「未查明」的 6 项（`web-perf`、`ponytail`、`ponytail-audit`、`ponytail-review`、`obsidian-markdown`、`writing-for-agents`）：本机无来源记录，且当前网络检索不可用，未做核实。请勿据此判断归属。
 
 ## 本机路径映射
 
