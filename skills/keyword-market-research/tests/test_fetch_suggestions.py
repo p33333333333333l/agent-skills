@@ -76,14 +76,39 @@ class SuggestionTests(unittest.TestCase):
                 self.assertEqual(result["status"], "error")
                 self.assertEqual(result["suggestions"], [])
 
-    def test_invalid_json_and_oversized_responses_are_errors(self):
-        for raw_response in (b"<html>challenge</html>", b" " * (fetch_suggestions.MAX_RESPONSE_BYTES + 1)):
-            with self.subTest(size=len(raw_response)):
-                response = response_fixture("seed", [])
-                response.read.return_value = raw_response
-                with patch.object(fetch_suggestions, "urlopen", return_value=response):
-                    result = fetch_suggestions.fetch_query("seed", "en", "us", 20)
-                self.assertEqual(result["status"], "error")
+    def test_invalid_json_is_an_error(self):
+        response = response_fixture("seed", [])
+        response.read.return_value = b"<html>challenge</html>"
+        with patch.object(fetch_suggestions, "urlopen", return_value=response):
+            result = fetch_suggestions.fetch_query("seed", "en", "us", 20)
+        self.assertEqual(result["status"], "error")
+
+    def test_oversized_response_is_an_error(self):
+        # Valid JSON that is too large: a fixture of invalid JSON (e.g. spaces)
+        # would fail in json.loads and leave the size guard untested.
+        oversized = json.dumps(
+            ["seed", ["x" * fetch_suggestions.MAX_RESPONSE_BYTES]]
+        ).encode("utf-8")
+        self.assertGreater(len(oversized), fetch_suggestions.MAX_RESPONSE_BYTES)
+        self.assertEqual(json.loads(oversized)[0], "seed")  # proves the fixture parses
+
+        response = response_fixture("seed", [])
+        response.read.return_value = oversized
+        with patch.object(fetch_suggestions, "urlopen", return_value=response):
+            result = fetch_suggestions.fetch_query("seed", "en", "us", 20)
+        self.assertEqual(result["status"], "error")
+        self.assertIn("size limit", result["error"])
+
+    def test_the_size_guard_is_what_rejects_an_oversized_response(self):
+        # Mutating the guard away must break this test, so the assertion above
+        # cannot pass for some unrelated reason.
+        oversized = json.dumps(["seed", ["x" * fetch_suggestions.MAX_RESPONSE_BYTES]]).encode("utf-8")
+        response = response_fixture("seed", [])
+        response.read.return_value = oversized
+        with patch.object(fetch_suggestions, "MAX_RESPONSE_BYTES", len(oversized) + 1):
+            with patch.object(fetch_suggestions, "urlopen", return_value=response):
+                result = fetch_suggestions.fetch_query("seed", "en", "us", 20)
+        self.assertEqual(result["status"], "ok")
 
     def test_transport_error_is_preserved(self):
         with patch.object(fetch_suggestions, "urlopen", side_effect=URLError("offline")):

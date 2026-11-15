@@ -35,7 +35,7 @@ cd agent-skills
 ./scripts/link-skills.sh --check  # 校验链接与 SKILL.md 完整性
 ```
 
-`link-skills.sh` 会为 `skills/` 下每个技能在 `~/.dsh/skills` 和 `~/.cc-switch/skills` 建立软链接。已存在的真实目录不会被覆盖，脚本会提示先自行处理。
+`link-skills.sh` 会为 `skills/` 下每个技能在 `~/.dsh/skills` 和 `~/.cc-switch/skills` 建立软链接。已存在的真实目录不会被覆盖，脚本会提示先自行处理。`--check` 除了逐个校验链接，还会反向扫一遍两个目标目录，把指向已不存在技能的 `STALE` 链接报出来并以非零退出。两个目标目录可用 `DSH_SKILLS_DIR`、`CC_SKILLS_DIR` 覆盖（想先试跑就指到临时目录）。
 
 ## 新增技能
 

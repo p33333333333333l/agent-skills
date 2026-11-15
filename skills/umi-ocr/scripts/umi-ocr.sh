@@ -17,7 +17,7 @@
 #   --keep               leave the service running when this call started it
 #
 # Exit codes: 0 ok, 1 usage/IO error, 2 OCR returned no text, 3 service unavailable.
-set -uo pipefail
+set -euo pipefail
 
 APP_DIR=${UMI_OCR_DIR:-$HOME/Applications/Umi-OCR}
 HOST=${UMI_OCR_HOST:-127.0.0.1}
@@ -29,31 +29,37 @@ die() { printf '%s\n' "$1" >&2; exit "${2:-1}"; }
 
 service_up() { curl -fsS -m 2 "$BASE/api/ocr/get_options" >/dev/null 2>&1; }
 
-# Print "started" on stdout when this call launched the service.
+# Return 0 when this call launched the service, 1 when it was already running.
 ensure_service() {
     if service_up; then return 1; fi
     [ -x "$APP_DIR/umi-ocr.sh" ] || die "Umi-OCR not found at $APP_DIR (set UMI_OCR_DIR)" 3
     local display=${UMI_OCR_DISPLAY:-${DISPLAY:-:0}}
+    # The log lives inside this call's private temp dir: a predictable shared
+    # path plus `>` truncation lets another user pre-create a symlink there.
     ( cd "$APP_DIR" && DISPLAY="$display" nohup ./umi-ocr.sh --hide \
-        >"${TMPDIR:-/tmp}/umi-ocr-service.log" 2>&1 & ) || die "failed to launch Umi-OCR" 3
+        >"$WORK/service.log" 2>&1 & ) || die "failed to launch Umi-OCR" 3
     local waited=0
     while [ "$waited" -lt "$START_TIMEOUT" ]; do
         sleep 1
         waited=$((waited + 1))
-        service_up && return 0
+        if service_up; then return 0; fi
     done
-    die "Umi-OCR HTTP service did not come up on $BASE within ${START_TIMEOUT}s; see ${TMPDIR:-/tmp}/umi-ocr-service.log" 3
+    die "Umi-OCR HTTP service did not come up on $BASE within ${START_TIMEOUT}s; see $WORK/service.log" 3
 }
 
+# Best effort: it also runs from the EXIT trap, where a failure would replace
+# the script's real exit code with the cleanup command's.
 stop_service() {
-    service_up || return 0
-    # /argv takes a plain JSON list of CLI arguments, not an {"argv": [...]} object.
-    curl -fsS -m 10 -X POST "$BASE/argv" -H 'Content-Type: application/json' \
-        -d '["--quit"]' >/dev/null 2>&1
-    for _ in $(seq 1 10); do
-        service_up || return 0
-        sleep 1
-    done
+    if service_up; then
+        # /argv takes a plain JSON list of CLI arguments, not an {"argv": [...]} object.
+        curl -fsS -m 10 -X POST "$BASE/argv" -H 'Content-Type: application/json' \
+            -d '["--quit"]' >/dev/null 2>&1 || true
+        for _ in $(seq 1 10); do
+            service_up || return 0
+            sleep 1
+        done
+    fi
+    return 0
 }
 
 lang_file() {
@@ -78,7 +84,7 @@ case "$MODE" in
         stop_service; echo "stopped"; exit 0 ;;
     ocr|shot) ;;
     ''|-h|--help)
-        sed -n '2,18p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+        sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) die "unknown command '$MODE' (ocr|shot|status|stop)" ;;
 esac
 
@@ -109,16 +115,20 @@ while [ $# -gt 0 ]; do
     esac
 done
 
+# `$WORK` must exist before `ensure_service`, which writes the service log here.
 WORK=$(mktemp -d "${TMPDIR:-/tmp}/umi-ocr.XXXXXX") || die "cannot create temp dir"
-cleanup() { rm -rf "$WORK"; }
-trap cleanup EXIT
+cleanup() { rm -rf "$WORK" || true; }
 
 STARTED=0
-ensure_service && STARTED=1
 finish() {
     if [ "$STARTED" = 1 ] && [ "$KEEP" = 0 ]; then stop_service; fi
 }
+# Exactly one EXIT trap, installed before anything that can fail: a second
+# `trap ... EXIT` would silently replace it, and a later one would miss the
+# service-start failure path.
 trap 'finish; cleanup' EXIT
+
+if ensure_service; then STARTED=1; fi
 
 # --- obtain the image -------------------------------------------------------
 if [ "$MODE" = shot ]; then
@@ -127,7 +137,7 @@ if [ "$MODE" = shot ]; then
     # Capture the full screen, then crop: spectacle's own -r opens an interactive
     # selector, which blocks a non-interactive call.
     shot_args=(-b -n -f -o "$IMAGE")
-    [ -n "$SCREEN" ] && shot_args+=(-m)
+    if [ -n "$SCREEN" ]; then shot_args+=(-m); fi
     spectacle "${shot_args[@]}" || die "spectacle capture failed" 3
     [ -s "$IMAGE" ] || die "spectacle produced no image" 3
     if [ -n "$RECT" ]; then
