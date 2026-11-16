@@ -1,0 +1,10 @@
+[
+  {"query":"这段说明读完还是不知道该干什么，帮我把重点和顺序理清。","should_trigger":true},
+  {"query":"把这份技术交付记录写给不懂开发的店主，让他知道结果和下一步。","should_trigger":true},
+  {"query":"读者在付款失败这一步，这里放什么信息，什么放帮助链接？","should_trigger":true},
+  {"query":"我想保留必要条件，又不想每次回复都像长篇报告。","should_trigger":true},
+  {"query":"保留所有信息，只把这段中文的AI腔改得自然一点。","should_trigger":false},
+  {"query":"给这个Python函数添加超时重试，保持现有接口。","should_trigger":false},
+  {"query":"帮我搜索Cloudflare最新的定价，给官方来源。","should_trigger":false},
+  {"query":"重写这个SKILL.md的description，让agent能在合适场景触发。","should_trigger":false}
+]
