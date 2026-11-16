@@ -86,7 +86,7 @@ STEM_MIN_LEN = 4
 #   path wrapped as code    `docs/`   **daily/**
 # Branch names (`origin/main`), file paths (`src/pages/index.astro`) and
 # markdown table rules (`|---|---|`) are rejected by those two conditions.
-TREE_LINE_RE = re.compile(r"^\s*(?:\|--|[├└]──|\+--)\s*([A-Za-z0-9_.\-]+)/")
+TREE_LINE_RE = re.compile(r"^\s*(?:\|--|`--|[├└]──|\+--)\s*([A-Za-z0-9_.\-]+)/")
 WRAPPED_AREA_RE = re.compile(r"(?:`|\*\*)([A-Za-z0-9_.\-]+)/(?:`|\*\*)")
 
 
@@ -108,8 +108,12 @@ def tracked_files(repo):
 
 
 def ignored_present(repo):
+    # No --directory: folding a whole ignored tree into one entry reports
+    # 1438 "paths" for a tree that holds 4770 files, and the count is what
+    # gets quoted in reports. Enumerating every file costs ~0.04s even with
+    # node_modules present.
     raw = git(repo, "ls-files", "--others", "--ignored", "--exclude-standard",
-              "--directory", "-z")
+              "-z")
     return [p for p in raw.split("\0") if p]
 
 
@@ -188,7 +192,7 @@ def declared_areas(repo, files, areas):
     # Ignored directories count as present: `run/` is gitignored by design and
     # is still a real directory the docs refer to.
     everywhere |= {p for entry in ignored_present(repo)
-                   for p in Path(entry.rstrip("/")).parts}
+                   for p in Path(entry.rstrip("/")).parts[:-1]}
     known = dict(areas)
 
     def on_disk(area):
@@ -382,7 +386,7 @@ def render(r):
     if not r["tracked_generated"]:
         a("  none")
     a("")
-    a(f"## ignored paths present on disk ({r['ignored_present_total']}) -- gitignore is working")
+    a(f"## ignored files present on disk ({r['ignored_present_total']}) -- gitignore is working")
     for area, n in r["ignored_present"]:
         a(f"  {n:>6}  {area}")
     if not r["ignored_present"]:

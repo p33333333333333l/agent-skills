@@ -5,8 +5,8 @@
     "source": "real",
     "prompt": "帮我整理一下 /var/home/admin/workspaces/gamer-agent 的目录，太乱了。",
     "checks": [
-      "报出 woh-agent 和 bbb-agent 是文档未登记的顶层区（各 83 / 53 个被跟踪文件）",
-      "指出 .pyc 未被跟踪且 .gitignore 已覆盖 __pycache__，因此不作为待办",
+      "指出磁盘上的 .pyc 全部未被 git 跟踪、且 .gitignore 已覆盖 __pycache__ / *.py[cod]，因此不作为待办；给出的数量与 `git status --ignored -uall --short | wc -l` 一致（4770）",
+      "不把 woh-agent / bbb-agent 报成文档未登记的顶层区（两者在 README.md 的目录表里有声明）",
       "不提出把 woh-agent 或 bbb-agent 整体改名/搬移的批量搬移计划"
     ]
   },

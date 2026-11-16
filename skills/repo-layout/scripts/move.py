@@ -16,7 +16,7 @@ The plan is JSON, one entry per move:
 
 Nothing happens unless --apply is passed. `--apply` requires a clean tree
 (override with --allow-dirty), and every move goes through `git mv`, so
-`git restore --staged --worktree .` puts everything back.
+`git restore --staged --worktree . && git clean -fd` puts everything back.
 """
 
 import argparse

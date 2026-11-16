@@ -10,7 +10,7 @@
 
 脚本用两条规则从这些文件里取区名，其余一律不当声明：
 
-- 目录树行：`|-- src/`、`├── src/`、`+-- src/`
+- 目录树行：`|-- src/`、`` `-- src/ ``、`├── src/`、`+-- src/`
 - 反引号或加粗包裹、且以斜杠结尾：`` `src/` ``、`**src/**`
 
 散文里出现的「和 `notes/` 类似」「origin/main」「src/pages/index.astro」不算。表格分隔线 `|---|---|` 也不算。这是刻意的：宁可漏一个声明，也不要凭空造一个。
@@ -71,7 +71,7 @@
 | 语言 | 写法 | 处理 |
 |---|---|---|
 | JS/TS | `'./nav'`、`'../data/nav'`、`'../data/nav.ts'`、`'src/data/nav'` | 全改 |
-| Python | `from nav import`（同目录裸名）、`from src.data.nav import`（点号包名） | 裸名改；点号包名**不改**，需人工确认 |
+| Python | `from nav import`（同目录裸名）、`from src.data.nav import`（点号包名） | 都不自动改，搬移前列出并人工修改；用项目测试验证 |
 | 文档 | `` `src/data/nav.ts` ``、`./src/data/nav` | 改（路径形状才改，裸名不改） |
 | 配置 | `"main": "host/patch-doc.js"`、`tsconfig.paths` | 改（repo 相对路径） |
 
