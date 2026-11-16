@@ -25,6 +25,7 @@ agent-skills/
 | `grilling` | 用 design tree 逐轮追问，压测计划或想法 |
 | `indie-product-gtm` | 把产品想法收成定位、ICP、渠道与 GTM 路线 |
 | `keyword-market-research` | 调研 SEO 关键词与市场机会 |
+| `specialist-team` | 默认分流编码与研究任务：小任务直接处理，复杂任务按需启用领域专家，并选择授权模型与推理等级 |
 
 ## 安装到新机器
 
@@ -36,6 +37,8 @@ cd agent-skills
 ```
 
 `link-skills.sh` 会为 `skills/` 下每个技能在 `~/.dsh/skills` 和 `~/.cc-switch/skills` 建立软链接。已存在的真实目录不会被覆盖，脚本会提示先自行处理。`--check` 除了逐个校验链接，还会反向扫一遍两个目标目录，把指向已不存在技能的 `STALE` 链接报出来并以非零退出。两个目标目录可用 `DSH_SKILLS_DIR`、`CC_SKILLS_DIR` 覆盖（想先试跑就指到临时目录）。
+
+本机已在 `~/.dsh/AGENTS.md` 设置 `specialist-team` 默认入口。新机器若也需要默认分流，可在全局约定中加入：编码、调试、审查与研究任务开始时先调用 `specialist-team`，由主代理决定直接处理或启用团队。链接脚本只安装技能，不修改全局约定；分流、选模与推理等级的细则以[技能正文](skills/specialist-team/SKILL.md)为准。
 
 ## 新增技能
 
