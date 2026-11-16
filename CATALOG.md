@@ -2,11 +2,11 @@
 
 本机在用技能的全量清单。**只有「自建」技能的正文收录在本仓库**；导入技能仅登记来源与许可证，正文不入库，避免转载版权内容。
 
-- 自建：8 个，正文在 `skills/`
+- 自建：9 个，正文在 `skills/`
 - 导入：23 个，正文在 `~/.cc-switch/skills/`（本机），来源见下表
-- 合计：31 个
+- 合计：32 个
 
-数字口径：`skills/` 下 8 个真实目录，`~/.cc-switch/skills/` 下 23 个真实目录（其余条目是指回本仓库的软链接），`~/.dsh/skills/` 共 31 个入口（8 个指向本仓库 + 23 个指向 `~/.cc-switch/skills/`）。新增或删除技能时，三处一起改。
+数字口径：本索引登记的技能数；自建以 `skills/` 下 9 个真实目录为准，导入以 `~/.cc-switch/skills/` 下 23 个真实目录为准。软链接可能尚未全部安装，实际入口状态用 `scripts/link-skills.sh --check` 核对。
 
 ## 自建技能（正文已收录）
 
@@ -19,6 +19,7 @@
 | [`grilling`](skills/grilling/SKILL.md) | 用 design tree 逐轮追问，压测计划、decision 或想法 | 2 |
 | [`indie-product-gtm`](skills/indie-product-gtm/SKILL.md) | 把产品想法收成定位、主 ICP、渠道优先级与 GTM 路线 | 2 |
 | [`keyword-market-research`](skills/keyword-market-research/SKILL.md) | 调研 SEO 关键词、验证搜索需求、分析竞品流量 | 6 |
+| [`repo-layout`](skills/repo-layout/SKILL.md) | 按项目既有约定盘点目录漂移，生成搬移计划、改引用并验收 | 7 |
 | [`specialist-team`](skills/specialist-team/SKILL.md) | 默认按风险分流，选择五类专家、授权模型与推理等级，限定职责并统一分派检查验收 | 1 |
 
 ## 导入技能（仅索引，正文不入库）

@@ -25,6 +25,7 @@ agent-skills/
 | `grilling` | 用 design tree 逐轮追问，压测计划或想法 |
 | `indie-product-gtm` | 把产品想法收成定位、ICP、渠道与 GTM 路线 |
 | `keyword-market-research` | 调研 SEO 关键词与市场机会 |
+| `repo-layout` | 按项目已有约定整理目录，盘点漂移、安全搬移并验证引用 |
 | `specialist-team` | 默认分流编码与研究任务，按需选择专家、授权模型与推理等级；专家各司其职，检查测试统一交指定验收人 |
 
 ## 安装到新机器

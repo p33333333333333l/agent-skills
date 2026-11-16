@@ -1,0 +1,59 @@
+[
+  {
+    "id": "dev-1",
+    "split": "dev",
+    "source": "real",
+    "prompt": "帮我整理一下 /var/home/admin/workspaces/gamer-agent 的目录，太乱了。",
+    "checks": [
+      "指出磁盘上的 .pyc 全部未被 git 跟踪、且 .gitignore 已覆盖 __pycache__ / *.py[cod]，因此不作为待办；给出的数量与 `git status --ignored -uall --short | wc -l` 一致（4770）",
+      "不把 woh-agent / bbb-agent 报成文档未登记的顶层区（两者在 README.md 的目录表里有声明）",
+      "不提出把 woh-agent 或 bbb-agent 整体改名/搬移的批量搬移计划"
+    ]
+  },
+  {
+    "id": "dev-2",
+    "split": "dev",
+    "source": "real",
+    "prompt": "/var/home/admin/workspaces/awesome-dsh-plugin-submission 这个仓库根目录有点乱，帮我规范化一下。",
+    "checks": [
+      "报出被 git 跟踪的 3 个 .pyc 文件（位于 .agents/skills/ui-ux-pro-max/scripts/__pycache__/）",
+      "对 .pyc 给出的处理是 git rm --cached 加补 .gitignore，而不是搬到别的目录",
+      "不提议搬动 data/ 目录下的文件"
+    ]
+  },
+  {
+    "id": "dev-3",
+    "split": "dev",
+    "source": "real",
+    "prompt": "/var/home/admin/workspaces/knowledge-base 这个笔记库看着目录挺杂的，帮我整理一下结构。",
+    "checks": [
+      "读出 SCHEMA.md 定义的五个区（daily/notes/raw/archive/templates）并判定实际目录与声明一致",
+      "不提议改动目录层级",
+      "说明该项目没有可自动跑的验证命令"
+    ]
+  },
+  {
+    "id": "holdout-1",
+    "split": "holdout",
+    "source": "real",
+    "prompt": "/var/home/admin/workspaces/p3l.me 的目录规范吗？有问题就整理。",
+    "checks": [
+      "结论是 AGENTS.md 声明的 7 个区（curation/docs/functions/prototypes/public/scripts/src）全部存在，无漂移",
+      "根目录的 APP_FLOW.md / DESIGN_SYSTEM.md / PRODUCT.md / LESSONS.md / MEMORY.md 判定为入口文档，留在根目录",
+      "不实际搬动任何文件"
+    ]
+  },
+  {
+    "id": "holdout-2",
+    "split": "holdout",
+    "source": "real",
+    "prompt": "跑 `bash <skill 目录>/tests/make-fixtures.sh /tmp/rlhold` 生成两个夹具仓库，然后整理 /tmp/rlhold/fixture-move 和 /tmp/rlhold/fixture-artifacts 这两个仓库的目录。",
+    "checks": [
+      "fixture-move：识别出根目录 tidy.js 应搬进 src/ 区，并给出搬移计划",
+      "fixture-move：搬移后 src/app.js 的 require('../tidy') 被改写成指向新位置的相对路径，npm test 通过",
+      "fixture-artifacts：报出 build/bundle.js 与 lib/helper.pyc 是被跟踪的产物，处理方式是取消跟踪（git rm --cached）而非搬移",
+      "fixture-artifacts：报出 tests/ 被 AGENTS.md 声明但不存在（ABSENT），且不擅自创建空目录",
+      "fixture-artifacts：报出 build/ 是存在但文档未登记的区"
+    ]
+  }
+]
