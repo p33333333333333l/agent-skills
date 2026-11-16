@@ -19,7 +19,7 @@
 | [`grilling`](skills/grilling/SKILL.md) | 用 design tree 逐轮追问，压测计划、decision 或想法 | 2 |
 | [`indie-product-gtm`](skills/indie-product-gtm/SKILL.md) | 把产品想法收成定位、主 ICP、渠道优先级与 GTM 路线 | 2 |
 | [`keyword-market-research`](skills/keyword-market-research/SKILL.md) | 调研 SEO 关键词、验证搜索需求、分析竞品流量 | 6 |
-| [`specialist-team`](skills/specialist-team/SKILL.md) | 默认按规模与风险分流任务，按需使用五类专家、授权模型与推理等级并独立验收 | 1 |
+| [`specialist-team`](skills/specialist-team/SKILL.md) | 默认按风险分流，选择五类专家、授权模型与推理等级，限定职责并统一分派检查验收 | 1 |
 
 ## 导入技能（仅索引，正文不入库）
 
