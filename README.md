@@ -25,7 +25,6 @@ agent-skills/
 | `grilling` | 用 design tree 逐轮追问，压测计划或想法 |
 | `indie-product-gtm` | 把产品想法收成定位、ICP、渠道与 GTM 路线 |
 | `keyword-market-research` | 调研 SEO 关键词与市场机会 |
-| `repo-layout` | 按项目已有约定整理目录，盘点漂移、安全搬移并验证引用 |
 | [`reader-first`](skills/reader-first/SKILL.md) | 按读者意图取舍信息、安排重点与链接，减少阅读和沟通负担 |
 
 ## 安装到新机器
