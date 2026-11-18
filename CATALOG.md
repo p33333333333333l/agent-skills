@@ -1,12 +1,12 @@
 # 技能索引
 
-本机在用技能的全量清单。**只有「自建」技能的正文收录在本仓库**；导入技能仅登记来源与许可证，正文不入库，避免转载版权内容。
+本索引记录 `~/.dsh/skills/` 下已安装的技能。自建技能的正文收录在本仓库，导入技能登记来源与许可证。DSH 运行时随预设提供的内置技能由预设维护。
 
-- 自建：8 个，正文在 `skills/`
-- 导入：23 个，正文在 `~/.cc-switch/skills/`（本机），来源见下表
-- 合计：31 个
+- 自建 8 个，正文在 `skills/`
+- 导入 16 个，正文在本机 `~/.cc-switch/skills/`，来源见下表
+- 合计 24 个
 
-数字口径：本索引登记的技能数；自建以 `skills/` 下 8 个真实目录为准，导入以 `~/.cc-switch/skills/` 下 23 个真实目录为准。软链接可能尚未全部安装，实际入口状态用 `scripts/link-skills.sh --check` 核对。`specialist-team` 已迁移为 DSH 插件，不计入技能清单。
+链接状态可用 `scripts/link-skills.sh --check` 核对。`specialist-team` 由 DSH 插件提供。
 
 ## 自建技能（正文已收录）
 
@@ -31,11 +31,6 @@
 | `cf-cli` | Cloudflare 官方技能包 | 未声明 | cf CLI 命令检索与执行 |
 | `wrangler` | Cloudflare 官方技能包 | 未声明 | Wrangler 项目开发与部署 |
 | `workers-best-practices` | Cloudflare 官方技能包 | 未声明 | Workers 生产实践 |
-| `workers-profiling` | Cloudflare 官方技能包 | 未声明 | Workers CPU/内存分析 |
-| `durable-objects` | Cloudflare 官方技能包 | 未声明 | Durable Objects 状态与协调 |
-| `turnstile-spin` | Cloudflare 官方技能包 | 未声明 | Turnstile 人机验证接入 |
-| `nextjs-on-cloudflare` | Cloudflare 官方技能包 | 未声明 | Next.js 部署到 Workers |
-| `cloudflare-email-service` | Cloudflare 官方技能包 | 未声明 | Email Sending/Routing |
 | `web-perf` | 未查明 | 未声明 | Core Web Vitals 与性能优化 |
 | `agent-reach` | github.com/Panniantong/Agent-Reach | 未声明 | 只读抓取各平台内容 |
 | `darwin-skill` | alchaincyf（花叔） | MIT | 技能自优化，含 9 维评分 |
@@ -45,9 +40,7 @@
 | `ponytail-audit` | 未查明 | 未声明 | 全仓质量审计，一次性出报告，不改代码 |
 | `ponytail-review` | 未查明 | 未声明 | 审查一次改动：逻辑、安全、负载、测试、性能、冗余 |
 | `design-taste-frontend` | tasteskill 2.5.1 | 未声明 | 前端设计与反模板化检查 |
-| `high-end-visual-design` | Classic style skill 包 | 未声明 | 高端视觉风格（按名调用） |
-| `minimalist-ui` | Classic style skill 包 | 未声明 | 极简编辑风 UI（按名调用） |
-| `redesign-existing-projects` | Classic style skill 包 | 未声明 | 已退役，并入 design-taste-frontend |
+| `drawio-skill` | [Agents365-ai/drawio-skill](https://github.com/Agents365-ai/drawio-skill) | MIT | 创建和编辑 draw.io 可编辑图表 |
 | `obsidian-markdown` | 未查明 | 未声明 | Obsidian 风格 Markdown |
 | `writing-for-agents` | 未查明 | 未声明 | 写给 agent 读的文档 |
 
