@@ -18,13 +18,13 @@ agent-skills/
 
 | 技能 | 用途 |
 |---|---|
-| `umi-ocr` | 用本机 Umi-OCR 精确识别图片文字，逐行给置信度和坐标 |
-| `add-entry-to-p3l-me` | 给 p3l.me 添加公开目录条目 |
-| `git-sync-preserve` | 无损同步 main 与 origin/main，保留未提交工作 |
-| `godot-scene-quality` | 审查改进 Godot 3D 场景画面与声音 |
-| `grilling` | 用 design tree 逐轮追问，压测计划或想法 |
-| `indie-product-gtm` | 把产品想法收成定位、ICP、渠道与 GTM 路线 |
-| `keyword-market-research` | 调研 SEO 关键词与市场机会 |
+| [`umi-ocr`](skills/umi-ocr/SKILL.md) | 用本机 Umi-OCR 精确识别图片文字，逐行给置信度和坐标 |
+| [`add-entry-to-p3l-me`](skills/add-entry-to-p3l-me/SKILL.md) | 给 p3l.me 添加公开目录条目 |
+| [`git-sync-preserve`](skills/git-sync-preserve/SKILL.md) | 无损同步 main 与 origin/main，保留未提交工作 |
+| [`godot-scene-quality`](skills/godot-scene-quality/SKILL.md) | 审查改进 Godot 3D 场景画面与声音 |
+| [`grilling`](skills/grilling/SKILL.md) | 用 design tree 逐轮追问，压测计划或想法 |
+| [`indie-product-gtm`](skills/indie-product-gtm/SKILL.md) | 把产品想法收成定位、ICP、渠道与 GTM 路线 |
+| [`keyword-market-research`](skills/keyword-market-research/SKILL.md) | 调研 SEO 关键词与市场机会 |
 | [`reader-first`](skills/reader-first/SKILL.md) | 按读者意图取舍信息、安排重点与链接，减少阅读和沟通负担 |
 
 ## 安装到新机器
