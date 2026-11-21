@@ -40,7 +40,7 @@
 | `ponytail-audit` | 未查明 | 未声明 | 全仓质量审计，一次性出报告，不改代码 |
 | `ponytail-review` | 未查明 | 未声明 | 审查一次改动：逻辑、安全、负载、测试、性能、冗余 |
 | `design-taste-frontend` | tasteskill 2.5.1 | 未声明 | 前端设计与反模板化检查 |
-| `drawio-skill` | [Agents365-ai/drawio-skill](https://github.com/Agents365-ai/drawio-skill) | MIT | 创建和编辑 draw.io 可编辑图表 |
+| `pretty-mermaid` | [imxv/Pretty-mermaid-skills](https://github.com/imxv/Pretty-mermaid-skills) | MIT | 本地把 Mermaid 图渲染为带主题的 SVG/PNG/ASCII，内置 15 套主题 |
 | `obsidian-markdown` | 未查明 | 未声明 | Obsidian 风格 Markdown |
 | `writing-for-agents` | 未查明 | 未声明 | 写给 agent 读的文档 |
 
