@@ -40,6 +40,8 @@ cd agent-skills
 
 `specialist-team` 已迁移为 DSH 插件，由插件注入任务分流、专家职责与选模规则。请通过 DSH 的插件机制安装和启用；本仓库的技能链接脚本不安装该插件。
 
+不要把这些链接建进 MausBot 的 `~/.openmausbot/imported-skills/`：那里的导入副本必须是真实目录，MausBot 不跟随软链接，换成链接后技能开关会被锁死并提示 “its files changed after it was brought in”。脚本遇到该目录会直接拒绝执行。
+
 ## 新增技能
 
 1. 在 `skills/<name>/` 下写 `SKILL.md`，frontmatter 至少含 `name` 和 `description`。

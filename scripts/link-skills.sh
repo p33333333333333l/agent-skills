@@ -35,6 +35,15 @@ die() { printf 'error: %s\n' "$1" >&2; exit 1; }
 
 [ -d "$SKILLS_DIR" ] || die "no skills directory at $SKILLS_DIR"
 
+# MausBot keeps real copies under .openmausbot/imported-skills and does not follow links:
+# a link there makes the app report "its files changed after it was brought in" and locks the
+# skill's switch. Never write into that data directory, whatever the env vars say.
+for d in "$DSH_DIR" "$CC_DIR"; do
+    case "$(realpath -m -- "$d")/" in
+        */.openmausbot/*) die "$d is inside the MausBot data directory; its imported skills must stay real copies" ;;
+    esac
+done
+
 # Collect the skill directories once. `nullglob` (above) makes a no-match glob
 # expand to nothing rather than the literal `*`, and counting this array is the
 # only reliable "is there anything to link" test: `ls -A` would also pass on a
