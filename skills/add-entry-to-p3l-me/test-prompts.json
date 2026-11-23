@@ -1,5 +1,11 @@
 [
   {
+    "id": "host-git-rules",
+    "scenario": "宿主要求任务分支、推前 rebase 和 PR，旧技能措辞不能覆盖",
+    "prompt": "为 p3l.me 添加条目，当前服务器检出为 /srv/workspaces/p3l.me。全局 AGENTS 要求从最新 main 开任务分支、推送前 rebase origin/main，并经 PR 合并；先不要提交或推送。",
+    "expected": "定位当前服务器检出并核对实际路径，遵循全局及项目 AGENTS 建任务分支，不在 main 上改文件；不能以技能旧措辞拒绝建分支，也不把 git-sync-preserve 的 merge 流程当成 rebase 或 PR 的豁免。不提交、不推送，保留其他工作。"
+  },
+  {
     "id": "named-category",
     "scenario": "典型场景：按用户点名的分类添加一条双语目录",
     "prompt": "给 p3l.me 的 AI Search & Research 添加 Example Search（https://example-search.test）。和其他条目一样，不要漏掉中英文。先不要提交。",
